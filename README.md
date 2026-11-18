@@ -2,7 +2,7 @@
 
 Hand-written **lexer** and **recursive-descent parser** (C++17) for the Citu
 educational language. It follows the grammar and the intermediate file formats
-from the Phase-1 report (`doc/Citu_Phase1_Report.pdf`).
+from the Phase-1 report (`doc/BSCS23083_CC_Project_Phase_1.pdf`).
 
 ## Project structure
 
@@ -11,7 +11,7 @@ include/  Token.h  Lexer.h  AST.h  Parser.h
 src/      Token.cpp  Lexer.cpp  AST.cpp  Parser.cpp  main.cpp
 examples/ prog1.citu  prog2.citu  prog3.citu      (the 3 Phase-1 programs)
 tests/    valid/  invalid/  expected/  run_tests.sh
-doc/      Citu_Phase1_Report.pdf / .tex            (Phase-1 report)
+doc/      BSCS23083_CC_Project_Phase_1.pdf / .tex            (Phase-1 report)
 Makefile  README.md
 ```
 
