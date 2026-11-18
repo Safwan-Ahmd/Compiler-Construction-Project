@@ -1,0 +1,11 @@
+int32 x ;
+x medalo 1 ;
+shuro
+  agar (x > 0) shuro
+    likho(x)
+  khatam
+  magar
+    likho(0)
+  likho(9)
+khatam
+likho(7)

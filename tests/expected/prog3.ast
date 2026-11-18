@@ -1,0 +1,30 @@
+Program
+  Declaration name=n
+  Assignment target=n
+    Number 5
+  While
+    Condition
+      BinaryOp op=>
+        Identifier n
+        Number 0
+    Body
+      Block
+        Print
+          Identifier n
+        Assignment target=n
+          BinaryOp op=+
+            Identifier n
+            Number -1
+  If
+    Condition
+      BinaryOp op=>
+        Identifier n
+        Number 3
+    Then
+      Block
+        Print
+          Identifier n
+    Else
+      Block
+        Print
+          Number 0

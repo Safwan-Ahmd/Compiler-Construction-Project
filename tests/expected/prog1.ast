@@ -1,0 +1,6 @@
+Program
+  Declaration name=x
+  Assignment target=x
+    Number 25
+  Print
+    Identifier x

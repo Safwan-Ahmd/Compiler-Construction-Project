@@ -1,0 +1,16 @@
+Program
+  Declaration name=a
+  Declaration name=b
+  Declaration name=result
+  Assignment target=a
+    Number 5
+  Assignment target=b
+    Number 3
+  Assignment target=result
+    BinaryOp op=+
+      Identifier a
+      BinaryOp op=*
+        Number 5
+        Identifier b
+  Print
+    Identifier result

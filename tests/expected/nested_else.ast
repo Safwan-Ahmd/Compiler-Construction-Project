@@ -1,0 +1,22 @@
+Program
+  Declaration name=x
+  Assignment target=x
+    Number 1
+  Block
+    If
+      Condition
+        BinaryOp op=>
+          Identifier x
+          Number 0
+      Then
+        Block
+          Print
+            Identifier x
+      Else
+        Block
+          Print
+            Number 0
+          Print
+            Number 9
+  Print
+    Number 7

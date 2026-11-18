@@ -1,0 +1,7 @@
+int32 a ;
+int32 b ;
+int32 result ;
+a medalo 5 ;
+b medalo 3 ;
+result medalo a + 5 * b ;
+likho(result)

@@ -1,0 +1,3 @@
+int32 x ;
+x medalo 25 ;
+likho(x)
