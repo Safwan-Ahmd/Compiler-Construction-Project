@@ -79,15 +79,3 @@ Program
   Print
     Identifier x
 ```
-
-## Submission (Phase 2)
-
-1. Push the whole project (including `doc/`) to your GitHub repository.
-2. Make sure `umarsuleman@gmail.com` and `mscs24052@itu.edu.pk` have access.
-3. On Google Classroom submit only:
-
-```
-Student ID: <your-id>
-Repository URL: https://github.com/<user>/<repo>
-Commit Hash: <hash from `git rev-parse HEAD`>
-```
