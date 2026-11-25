@@ -1,6 +1,6 @@
 # Citu Compiler – Phase 3 (Lexer + Parser + Semantic Analyzer)
 
-Hand-written **lexer**, **recursive-descent parser** and **semantic analyzer** (C++17)
+**lexer**, **recursive-descent parser** and **semantic analyzer** (C++17)
 for the Citu educational language. It follows the grammar and the intermediate file formats
 from the Phase-1 report (`doc/Citu_Phase1_Report.pdf`).
 
@@ -106,16 +106,4 @@ Name          Type     Scope   Line
 a             int32    0       1
 b             int32    0       2
 result        int32    0       3
-```
-
-## Submission
-
-1. Push the whole project (including `doc/`) to your GitHub repository.
-2. Make sure `umarsuleman@gmail.com` and `mscs24052@itu.edu.pk` have access.
-3. On Google Classroom submit only:
-
-```
-Student ID: <your-id>
-Repository URL: https://github.com/<user>/<repo>
-Commit Hash: <hash from `git rev-parse HEAD`>
 ```
