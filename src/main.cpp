@@ -1,5 +1,6 @@
 #include "Lexer.h"
 #include "Parser.h"
+#include "Semantic.h"
 #include "AST.h"
 #include <cstdlib>
 #include <iostream>
@@ -27,25 +28,27 @@ static bool writeFile(const std::string& path, const std::string& text) {
 }
 
 static void printUsage(const char* prog) {
-    std::cout << "Usage: " << prog << " <source.citu> [--tokens] [--ast] [-o <prefix>]\n"
+    std::cout << "Usage: " << prog << " <source.citu> [--tokens] [--ast] [--sym] [-o <prefix>]\n"
               << "  --tokens     Print only the token stream\n"
               << "  --ast        Print only the Abstract Syntax Tree\n"
-              << "  (default)    Print both + success / error summary\n"
-              << "  -o <prefix>  Also write <prefix>.tokens and <prefix>.ast\n"
-              << "Exit code: 0 = accepted, 1 = lexical/syntax error or bad usage.\n";
+              << "  --sym        Print only the symbol table\n"
+              << "  (default)    Print everything + success / error summary\n"
+              << "  -o <prefix>  Also write <prefix>.tokens, <prefix>.ast and <prefix>.sym\n"
+              << "Exit code: 0 = accepted (warnings allowed), 1 = lexical / syntax / semantic error or bad usage.\n";
 }
 
 int main(int argc, char* argv[]) {
     if (argc < 2) { printUsage(argv[0]); return 1; }
 
     std::string filename = argv[1];
-    bool showTokens = false, showAST = false;
+    bool showTokens = false, showAST = false, showSym = false;
     std::string outPrefix;
 
     for (int i = 2; i < argc; ++i) {
         std::string arg = argv[i];
         if (arg == "--tokens") showTokens = true;
         else if (arg == "--ast") showAST = true;
+        else if (arg == "--sym") showSym = true;
         else if (arg == "-o" && i + 1 < argc) outPrefix = argv[++i];
         else {
             std::cerr << "Unknown or incomplete option: " << arg << "\n";
@@ -53,8 +56,8 @@ int main(int argc, char* argv[]) {
             return 1;
         }
     }
-    bool explicitFlag = showTokens || showAST;
-    if (!explicitFlag) { showTokens = true; showAST = true; }
+    bool explicitFlag = showTokens || showAST || showSym;
+    if (!explicitFlag) { showTokens = true; showAST = true; showSym = true; }
 
     std::string source;
     if (!readFile(filename, source)) {
@@ -99,11 +102,32 @@ int main(int argc, char* argv[]) {
     }
     if (!outPrefix.empty() && !writeFile(outPrefix + ".ast", astText.str())) return 1;
 
+    // ---------- Semantic analyzer ----------
+    SemanticAnalyzer sema;
+    sema.analyze(*ast);
+
+    if (showSym) {
+        if (showTokens || showAST) std::cout << "\n";
+        std::cout << "=== Symbol Table ===\n" << sema.symbols().dump();
+    }
+    if (!outPrefix.empty() && !writeFile(outPrefix + ".sym", sema.symbols().dump())) return 1;
+
+    if (!sema.diagnostics().empty()) {
+        std::cerr << "\n=== Semantic Diagnostics ===\n";
+        for (const auto& d : sema.formattedDiagnostics()) std::cerr << d << "\n";
+    }
+    if (sema.hadError()) {
+        std::cerr << "\nSemantic analysis FAILED (" << sema.errorCount() << " error(s), "
+                  << sema.warningCount() << " warning(s)).\n";
+        return 1;
+    }
+
     if (!explicitFlag) {
         std::cout << "\n=== Result ===\n"
-                  << "Lexing  : OK\n"
-                  << "Parsing : OK\n"
-                  << "Program accepted by Citu grammar.\n";
+                  << "Lexing   : OK\n"
+                  << "Parsing  : OK\n"
+                  << "Semantics: OK (" << sema.warningCount() << " warning(s))\n"
+                  << "Program accepted by the Citu compiler front end.\n";
     }
     return 0;
 }

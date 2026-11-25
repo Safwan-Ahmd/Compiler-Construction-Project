@@ -1,0 +1,5 @@
+Name          Type     Scope   Line
+------------------------------------
+a             int32    0       1
+b             int32    0       2
+result        int32    0       3

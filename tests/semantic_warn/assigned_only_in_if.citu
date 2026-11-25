@@ -1,0 +1,5 @@
+int32 x ;
+int32 c ;
+c medalo 1 ;
+agar (c > 0) shuro x medalo 1 khatam
+likho(x)

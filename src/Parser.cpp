@@ -218,7 +218,7 @@ ASTPtr Parser::factor() {
         return std::make_unique<NumberNode>(val);
     }
     if (match(TokenType::IDENTIFIER)) {
-        return std::make_unique<IdentifierNode>(previous().lexeme);
+        return std::make_unique<IdentifierNode>(previous().lexeme, previous().line);
     }
     if (match(TokenType::LPAREN)) {
         ASTPtr expr = expression();

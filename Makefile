@@ -1,6 +1,6 @@
 CXX      = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -Iinclude -g
-SRC      = src/Token.cpp src/Lexer.cpp src/AST.cpp src/Parser.cpp src/main.cpp
+SRC      = src/Token.cpp src/Lexer.cpp src/AST.cpp src/Parser.cpp src/Semantic.cpp src/main.cpp
 OBJ      = $(SRC:.cpp=.o)
 TARGET   = citu
 

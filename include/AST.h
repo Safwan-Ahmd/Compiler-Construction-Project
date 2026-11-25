@@ -80,7 +80,8 @@ struct BinaryOpNode : ASTNode {
 
 struct IdentifierNode : ASTNode {
     std::string name;
-    explicit IdentifierNode(std::string n) : name(std::move(n)) {}
+    int line;
+    IdentifierNode(std::string n, int ln) : name(std::move(n)), line(ln) {}
     void print(std::ostream& os, int indent = 0) const override;
 };
 
